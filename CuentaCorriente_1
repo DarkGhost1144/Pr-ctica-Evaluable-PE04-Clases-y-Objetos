@@ -1,0 +1,108 @@
+/**
+ *
+ * @author alumno
+ */
+public class CuentaCorriente1 {
+
+    private String dni;
+    private String nombreTitular;
+    private double saldo;
+
+    public CuentaCorriente1(String dni, String nombreTitular, double saldo) {
+        this.dni = dni;
+        this.nombreTitular = nombreTitular;
+        this.saldo = saldo;
+    }
+
+    public CuentaCorriente1(String dni, String nombreTitular) {
+        this.dni = dni;
+        this.nombreTitular = nombreTitular;
+        this.saldo = 0;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getNombreTitular() {
+        return nombreTitular;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setNombreTitular(String nombreTitular) {
+        this.nombreTitular = nombreTitular;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public boolean sacarDinero(double cantidad) {
+        if (cantidad > this.saldo) {
+            return false;
+        } else {
+            this.saldo = this.saldo - cantidad;
+            return true;
+        }
+    }
+
+    public void ingresarDinero(double cantidad) {
+        if (cantidad > 0) {
+            this.saldo = this.saldo + cantidad;
+        }
+    }
+
+    public String informacionCuenta() {
+        String c = "El nombre del titular es " + this.nombreTitular + " su dni es " + this.dni + " tiene de saldo " + this.saldo;
+        return c;
+    }
+}
+
+
+/**
+ *
+ * @author Jkur
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        CuentaCorriente1 c1 = new CuentaCorriente1("12345678", "Jakub kurkowski");
+        CuentaCorriente1 c2 = new CuentaCorriente1("87654321", "Agustin Perez");
+        CuentaCorriente1 c3 = new CuentaCorriente1("4561327", "Mario marin");
+
+        System.out.println(c1.informacionCuenta());
+        System.out.println(c2.informacionCuenta());
+        System.out.println(c3.informacionCuenta());
+
+        System.out.println("-----------------------------");
+
+        System.out.println("Ingresar 1000 EUROS a C1");
+        c1.ingresarDinero(1000);
+        System.out.println(c1.informacionCuenta());
+
+        System.out.println("Ingresar 2500 EUROS a C2");
+        c2.ingresarDinero(2000);
+        System.out.println(c2.informacionCuenta());
+
+        System.out.println("Ingresar 1500 EUROS a C3");
+        c3.ingresarDinero(1500);
+        System.out.println(c3.informacionCuenta());
+
+        System.out.println("-----------------------------");
+
+        System.out.println("Le quitamos a C1 200 EUROS");
+        c1.sacarDinero(200);
+        System.out.println(c1.informacionCuenta());
+        
+        System.out.println("Le quitamos a C2 150,50 EUROS");
+        c2.sacarDinero(150.50);
+        System.out.println(c2.informacionCuenta());
+    }
+}
