@@ -1,0 +1,119 @@
+package com.mycompany.pe04_clases_y_objetos;
+
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see String
+ * 
+ */
+public class Calendario {
+
+    private int dia;
+    private int mes;
+    private int anyo;
+
+    public Calendario(int dia, int mes, int anyo) {
+        this.dia = dia;
+        this.mes = mes;
+        this.anyo = anyo;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public int getAnyo() {
+        return anyo;
+    }
+
+    public void incrementarDia() {
+        this.dia++;
+        if (this.dia> dia) {
+            this.dia = 1;
+            this.incrementarMes();
+        }
+    }
+
+    public void incrementarMes() {
+        this.mes++;
+        if (this.mes>12) {
+            this.mes = 1;
+            this.incrementarAnyo(1);
+        }
+    }
+
+    public void incrementarAnyo(int cantidad) {
+        this.anyo += cantidad;
+    }
+    
+   public boolean equals(Calendario otro) {
+        // Compara si todos los atributos son iguales
+        return this.dia == otro.dia &&
+               this.mes == otro.mes &&
+               this.anyo == otro.anyo;
+    }
+
+    public String imprimirCalendario() {
+        String s = "El dia es " + this.dia + " del mes " + this.mes + " del anyo " + this.anyo;
+        return s;
+    }
+}
+
+
+
+package com.mycompany.pe04_clases_y_objetos;
+
+/**
+ *
+ * @author JKur
+ * @version 1.0
+ * @see String
+ * @see Calendario
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        Calendario c1 = new Calendario(10, 9, 2003);
+        Calendario c2 = new Calendario(14, 12, 1999);
+        Calendario c3 = new Calendario(12, 11, 2007);
+
+        System.out.println(c1.imprimirCalendario());
+        System.out.println(c2.imprimirCalendario());
+        System.out.println(c3.imprimirCalendario());
+
+        System.out.println("-----------------------------");
+
+        int d1 = c1.getDia();
+        System.out.println("El dia de C1 es: " + d1);
+        int d2 = c2.getDia();
+        System.out.println("El dia de C2 es: " + d2);
+        int d3 = c3.getDia();
+        System.out.println("El dia de C3 es: " + d3);
+
+        System.out.println("-----------------------------");
+
+        c1.incrementarDia();
+        c1.incrementarDia();
+        c1.incrementarDia();
+        c1.incrementarDia();
+        c1.incrementarDia();
+        System.out.println(c1.imprimirCalendario());
+
+        c2.getMes();
+        c2.getMes();
+        c2.getMes();
+        c2.getMes();
+        c2.getMes();
+        System.out.println(c2.imprimirCalendario());
+
+        System.out.println("-----------------------------");
+
+        c3.incrementarAnyo(25);
+        System.out.println(c3.imprimirCalendario());
+    }
+}
