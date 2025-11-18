@@ -1,0 +1,138 @@
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see String
+ */
+public class CuentaCorriente2 {
+
+    // --- ATRIBUTOS ---
+    private String dni;
+    private String nombreTitular;
+    private double saldo;
+
+    // --- CONSTRUCTORES SOBRECARGADOS ---
+    /**
+     * Constructor (Parte II - DNI, Nombre y Saldo) Este es el constructor
+     * principal.
+     */
+    public CuentaCorriente2(String dni, String nombreTitular, double saldoInicial) {
+        this.dni = dni;
+        this.nombreTitular = nombreTitular;
+        this.saldo = saldoInicial;
+    }
+
+    /**
+     * Constructor El saldo inicial será 0. Llama al constructor principal (el
+     * de arriba) pasando 0.0 como saldo.
+     */
+    public CuentaCorriente2(String dni, String nombreTitular) {
+        this(dni, nombreTitular, 0.0);
+    }
+
+    /**
+     * Constructor El nombre del titular no se especifica. Llama al constructor
+     * principal pasando "Sin nombre" como titular.
+     */
+    public CuentaCorriente2(String dni, double saldoInicial) {
+        this(dni, "Sin nombre", saldoInicial);
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getNombreTitular() {
+        return nombreTitular;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setNombreTitular(String nombreTitular) {
+        this.nombreTitular = nombreTitular;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    
+    /**
+     * Saca dinero de la cuenta.
+     */
+    public boolean sacarDinero(double cantidad) {
+        if (cantidad > this.saldo) {
+            return false; // Saldo insuficiente
+        } else {
+            this.saldo -= cantidad;
+            return true; // Operación exitosa
+        }
+    }
+
+    /**
+     * Ingresa dinero en la cuenta.
+     */
+    public void ingresarDinero(double cantidad) {
+        if (cantidad > 0) {
+            this.saldo += cantidad;
+        }
+    }
+
+    /**
+     * Muestra la información de la cuenta.
+     */
+    public String mostrarInformacion() {
+        String c2 = "El nombre del titular es " + this.nombreTitular + " su dni es " + this.dni + " tiene de saldo " + this.saldo;
+        return c2;
+    }
+}
+
+
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see CuentaCorriente2
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        CuentaCorriente2 c1 = new CuentaCorriente2("12345678", "Mario Raposo", 20000);
+        CuentaCorriente2 c2 = new CuentaCorriente2("87654321", "Jakub Kurkowski", 10000);
+        CuentaCorriente2 c3 = new CuentaCorriente2("45678123", "Daniel Vaquez", 15000);
+
+        System.out.println(c1.mostrarInformacion());
+        System.out.println(c2.mostrarInformacion());
+        System.out.println(c3.mostrarInformacion());
+
+        System.out.println("-----------------------------");
+
+        System.out.println("Ingresa 1000 EUROS a C1");
+        c1.ingresarDinero(1000);
+        System.out.println(c1.mostrarInformacion());
+
+        System.out.println("Ingresa 2500 EUROS a C2");
+        c2.ingresarDinero(2000);
+        System.out.println(c2.mostrarInformacion());
+
+        System.out.println("Ingresa 1500 EUROS a C3");
+        c3.ingresarDinero(1500);
+        System.out.println(c3.mostrarInformacion());
+
+        System.out.println("-----------------------------");
+
+        System.out.println("Le quitamos a C1 200 EUROS");
+        c1.sacarDinero(200);
+        System.out.println(c1.mostrarInformacion());
+
+        System.out.println("Le quitamos a C2 150,50 EUROS");
+        c2.sacarDinero(150.50);
+        System.out.println(c2.mostrarInformacion());
+    }
+}
