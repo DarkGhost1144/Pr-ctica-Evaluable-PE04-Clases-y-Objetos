@@ -1,0 +1,260 @@
+
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see String
+ */
+public class Cliente {
+
+    private String dni;
+    private String nombre;
+    private String apellidos;
+    private String telefono;
+
+    public Cliente(String dni, String nombre, String apellidos, String telefono) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.telefono = telefono;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String NombreCompleto() {
+        String n = "El nombre es " + this.nombre + " apellidos " + this.apellidos + " con el dni " + this.dni + " y el telefono es " + this.telefono;
+        return n;
+    }
+}
+
+
+package com.mycompany.pe04_clases_y_objetos.Vehículo_Cliente_VehículoAlquilado;
+
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see String
+ */
+public class Vehiculo {
+
+    private String marca;
+    private String matricula;
+    private String modelo;
+    private double tarifa;
+    private boolean disponible;
+
+    public Vehiculo(String marca, String matricula, String modelo, double tarifa, boolean disponible) {
+        this.marca = marca;
+        this.matricula = matricula;
+        this.modelo = modelo;
+        this.tarifa = tarifa;
+        this.disponible = disponible;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public double getTarifa() {
+        return tarifa;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setTarifa(double tarifa) {
+        this.tarifa = tarifa;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public String imprimirVehiculo() {
+        String s = "La marca es " + this.marca + " el modelo es " + this.modelo + " la matricula es " + this.matricula + " la tarifa es " + this.tarifa + " y esta disponible " + this.disponible;
+        return s;
+    }
+}
+
+
+import java.time.LocalDate;
+
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see LocalDate
+ */
+public class VehiculoAlquilado {
+    private String vehiculo;
+    private String cliente;
+    private LocalDate fechaAlquiler;
+    private int diaAlquiler;
+
+    public VehiculoAlquilado(String vehiculo, String cliente, LocalDate fechaAlquiler, int diaAlquiler) {
+        this.vehiculo = vehiculo;
+        this.cliente = cliente;
+        this.fechaAlquiler = fechaAlquiler;
+        this.diaAlquiler = diaAlquiler;
+    }
+
+    public String getVehiculo() {
+        return vehiculo;
+    }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public LocalDate getFechaAlquiler() {
+        return fechaAlquiler;
+    }
+
+    public int getDiaAlquiler() {
+        return diaAlquiler;
+    }
+
+    public void setVehiculo(String vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setFechaAlquiler(LocalDate fechaAlquiler) {
+        this.fechaAlquiler = fechaAlquiler;
+    }
+
+    public void setDiaAlquiler(int diaAlquiler) {
+        this.diaAlquiler = diaAlquiler;
+    }
+
+
+    
+    
+}
+
+
+import java.time.LocalDate;
+
+/**
+ *
+ * @author JKur
+ * @version 1.0
+ * @see Cliente
+ * @see Vehiculo
+ * @see VehiculoAlquilado
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        Cliente c1 = new Cliente("123456789", "Jakub", "Kurkowski", "159753");
+        Cliente c2 = new Cliente("987654321", "Marcos", "Vicente", "123456");
+        Cliente c3 = new Cliente("456123789", "Pablo", "Rufino", "654321");
+
+        Vehiculo v1 = new Vehiculo("Seat", "1234", "Leon", 175.00, true);
+        Vehiculo v2 = new Vehiculo("BMW", "4321", "X3", 255.00, false);
+        Vehiculo v3 = new Vehiculo("AUDI", "4231", "TT", 350.50, true);
+
+        VehiculoAlquilado va1 = new VehiculoAlquilado("Seat", "Jakub", LocalDate.of(2025, 11, 9), 10);
+        VehiculoAlquilado va2 = new VehiculoAlquilado("BMW", "Marcos", LocalDate.of(2025, 12, 10), 9);
+        VehiculoAlquilado va3 = new VehiculoAlquilado("AUDI", "Pablo", LocalDate.of(2025, 11, 9), 10);
+
+        System.out.println(c1.NombreCompleto());
+        System.out.println(c2.NombreCompleto());
+        System.out.println(c3.NombreCompleto());
+
+        System.out.println("-----------------------------");
+
+        System.out.println(v1.imprimirVehiculo());
+        System.out.println(v2.imprimirVehiculo());
+        System.out.println(v3.imprimirVehiculo());
+
+        System.out.println("-----------------------------");
+
+        String s1 = va1.getCliente();
+        System.out.println("El cliente de VA1 es " + s1);
+
+        String s2 = va2.getCliente();
+        System.out.println("El cliente de VA2 es " + s2);
+
+        String s3 = va3.getCliente();
+        System.out.println("El cliente de VA3 es " + s3);
+
+        System.out.println("-----------------------------");
+
+        int d1 = va1.getDiaAlquiler();
+        System.out.println("Los dias de alquiler de VA1 son de: " + d1);
+
+        int d2 = va2.getDiaAlquiler();
+        System.out.println("Los dias de alquiler de VA2 son de: " + d2);
+
+        int d3 = va3.getDiaAlquiler();
+        System.out.println("Los dias de alquiler de VA3 son de: " + d3);
+
+        System.out.println("-----------------------------");
+
+        LocalDate l1 = va1.getFechaAlquiler();
+        System.out.println("La fecha de alquiler de VA1 es " + l1);
+        
+        LocalDate l2 = va2.getFechaAlquiler();
+        System.out.println("La fecha de alquiler de VA2 es " + l2);
+
+        LocalDate l3 = va3.getFechaAlquiler();
+        System.out.println("La fecha de alquiler de VA3 es " + l3);
+
+    }
+}
