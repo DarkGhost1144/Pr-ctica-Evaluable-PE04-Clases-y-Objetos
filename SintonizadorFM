@@ -1,0 +1,105 @@
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see String
+ */
+public class SintonizadorFm {
+
+    private double frecuenciaActual;
+    private double frecuenciaMinima = 80.8;
+    private double frecuenciaMaxima = 108.8;
+    private double salto = 0.5;
+
+    //Constructor de SintonizadorFm
+    public SintonizadorFm(double frecuenciaActual, double frecuenciaMinima, double frecuenciaMaxima, double salto) {
+        this.frecuenciaActual = frecuenciaActual;
+        this.frecuenciaMinima = frecuenciaMinima;
+        this.frecuenciaMaxima = frecuenciaMaxima;
+        this.salto = salto;
+    }
+
+    public SintonizadorFm(double frecuenciaInicial) {
+        //Aqui estoy comprobando que la frecuencia este entre 80 y 108
+        if ((frecuenciaInicial >= this.frecuenciaMinima) && (frecuenciaInicial <= this.frecuenciaMaxima)) {
+            this.frecuenciaActual = frecuenciaInicial;
+            //Si la frencuencia no esta en el rango entre 80 y 108, volvemos a poner la frecuencia actual a 80
+        } else {
+            this.frecuenciaActual = this.frecuenciaMinima;
+        }
+    }
+
+    //Estoy haciendo un constructor sin parametros que pone por defecto a 80 Mhz
+    public SintonizadorFm() {
+        this.frecuenciaActual = frecuenciaMinima; //Tiene por defecto 80 MHz
+    }
+
+    // Subir la frecuencia en 0.5 MHz
+    public void up() {
+        this.frecuenciaActual = this.frecuenciaActual + this.salto;
+        //Si nos pasamos del limite superior, volvemos al minimo
+        if (this.frecuenciaActual > this.frecuenciaMaxima) {
+            this.frecuenciaActual = this.frecuenciaMinima;
+        }
+    }
+    // Bajar la frecuencia en 0.5 MHz
+
+    public void dowwn() {
+        this.frecuenciaActual = this.frecuenciaActual - this.salto;
+        //Si bajamos del limite inferior volvemos al maximo
+        if (this.frecuenciaActual < this.frecuenciaMinima) {
+            this.frecuenciaActual = this.frecuenciaMaxima;
+        }
+    }
+
+    public String mostrarDisplay() {
+        String f = "La frecuencia actual es: " + this.frecuenciaActual + "Mhz";
+        return f;
+    }
+}
+
+/**
+ *
+ * @author Jkur
+ * @version 1.0
+ * @see SintonizadorFm
+ */
+public class Main {
+
+    public static void main(String[] args) {
+        SintonizadorFm radio1 = new SintonizadorFm(59);
+        SintonizadorFm radio2 = new SintonizadorFm();//Aqui inicializa en 80 ya que es la frecuenca preestablecida
+        SintonizadorFm radio3 = new SintonizadorFm(107.0);
+        SintonizadorFm radio4 = new SintonizadorFm(95.5);
+
+        System.out.println(radio1.mostrarDisplay());//Aqui nos mostrara "80" ya que no esta el ranfo entre 80 y 108, ya que le hemos puesto "59"
+        System.out.println(radio2.mostrarDisplay());
+        System.out.println(radio3.mostrarDisplay());
+        System.out.println(radio4.mostrarDisplay());
+
+        System.out.println("--------------------------------");
+
+        System.out.println("Subimos 4 veces la frecuencia a radio 3:");
+        radio3.up();
+        System.out.println("Radio 3: " + radio3.mostrarDisplay());
+        radio3.up();
+        System.out.println("Radio 3: " + radio3.mostrarDisplay());
+        radio3.up();
+        System.out.println("Radio 3: " + radio3.mostrarDisplay());
+        radio3.up();
+        System.out.println("Radio 3: " + radio3.mostrarDisplay());
+
+        System.out.println("Bajamos 2 veces la frecuencia a radio 3:");
+        radio3.dowwn();
+        System.out.println(radio3.mostrarDisplay());
+        radio3.dowwn();
+        System.out.println(radio3.mostrarDisplay());
+
+        System.out.println("--------------------------------");
+
+        for (int i = 0; i < 30; i++) { //Aqui estoy haciendo un for para que nos recorra radio4 30 veces y que nos muestre por pantalla todas las frencuencias y como va a subrepasar el rango 108, volvera a subir de 80
+            radio4.up();
+            System.out.println(radio4.mostrarDisplay());
+        }
+    }
+}
