@@ -1,0 +1,127 @@
+import java.time.LocalDate;
+
+/**
+ * Clase Texto que representa una cadena de caracteres con longitud maxima.
+ * Permite añadir caracteres o palabras al principio o al final y mostrar
+ * informacion. Guarda tambien la fecha de creacion.
+ *
+ * @author  JKur 
+ * @version  1.0
+ *
+ * @see String
+ * @see LocalDate
+ */
+public class Texto {
+
+    private String cadena;           // Cadena actual
+    private LocalDate creacion;      // Fecha de creacion del objeto
+    private int longitudMaxima;      // Longitud maxima permitida
+
+    /**
+     * Constructor que inicializa la longitud maxima, la cadena vacia y la fecha
+     * actual.
+     *
+     * @param longitudMaxima longitud maxima de la cadena
+     */
+    public Texto(int longitudMaxima) {
+        this.longitudMaxima = longitudMaxima;
+        this.cadena = "";             // Cadena vacia al inicio
+        this.creacion = LocalDate.now(); // Fecha actual
+    }
+
+    /**
+     * Añade un caracter al final de la cadena si no supera la longitud maxima.
+     *
+     * @param c caracter a añadir
+     */
+    public void addFinal(char c) {
+        if (cadena.length() + 1 <= longitudMaxima) {
+            cadena += c;
+        } else {
+            System.out.println("No se puede anyadir el caracter. Se supera la longitud maxima.");
+        }
+    }
+
+    /**
+     * Añade una palabra al final de la cadena si no supera la longitud maxima.
+     *
+     * @param texto palabra o texto a añadir
+     */
+    public void addFinal(String texto) {
+        if (cadena.length() + texto.length() <= longitudMaxima) {
+            cadena += texto;
+        } else {
+            System.out.println("No se puede anyadir el texto. Se supera la longitud maxima.");
+        }
+    }
+
+    /**
+     * Añade un caracter al principio de la cadena si no supera la longitud
+     * maxima.
+     *
+     * @param c caracter a añadir
+     */
+    public void addPrincipio(char c) {
+        if (cadena.length() + 1 <= longitudMaxima) {
+            cadena = c + cadena;
+        } else {
+            System.out.println("No se puede anyadir el caracter. Se supera la longitud maxima.");
+        }
+    }
+
+    /**
+     * Añade una palabra al principio de la cadena si no supera la longitud
+     * maxima.
+     *
+     * @param texto palabra o texto a añadir
+     */
+    public void addPrincipio(String texto) {
+        if (cadena.length() + texto.length() <= longitudMaxima) {
+            cadena = texto + cadena;
+        } else {
+            System.out.println("No se puede anyadir el texto. Se supera la longitud maxima.");
+        }
+    }
+
+    /**
+     * Muestra la informacion completa de la cadena: valor actual, fecha de
+     * creacion, longitud maxima y longitud actual.
+     */
+    public void mostrar() {
+        System.out.println("Cadena actual: \"" + cadena + "\"");
+        System.out.println("Fecha de creacion: " + creacion);
+        System.out.println("Longitud maxima: " + longitudMaxima);
+        System.out.println("Longitud actual: " + cadena.length());
+    }
+}
+
+/**
+ * Clase Main para probar la clase Texto. Se crean cadenas de texto y se prueban
+ * los metodos de añadir caracteres y palabras.
+ *
+ * @author JKur
+ * @version 1.0
+ * @see Texto
+ */
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Creamos un texto con longitud maxima de 20 caracteres
+        Texto t = new Texto(20);
+
+        // Añadimos palabras y caracteres al final
+        t.addFinal("Hola");
+        t.addFinal(' ');
+        t.addFinal("mundo");
+
+        // Añadimos palabras al principio y al final
+        t.addPrincipio(">> ");
+        t.addFinal(" <<");
+
+        // Mostramos toda la informacion del texto
+        t.mostrar();
+    }
+}
+
+
