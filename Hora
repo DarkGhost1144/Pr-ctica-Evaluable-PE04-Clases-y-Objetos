@@ -1,0 +1,151 @@
+/**
+ * Clase Hora que representa una hora del dia con horas, minutos y segundos.
+ * Permite actualizar la hora, los minutos y segundos, y avanzar los segundos.
+ * 
+ * @author  JKur
+ * @version  1.0
+ * @see String
+ */
+public class Hora {
+
+    private int hora;     // Hora actual (0-23)
+    private int minutos;  // Minutos actuales (0-59)
+    private int segundos; // Segundos actuales (0-59)
+
+    /**
+     * Constructor que inicializa la hora completa.
+     * 
+     * @param hora hora inicial
+     * @param minutos minutos iniciales
+     * @param segundos segundos iniciales
+     */
+    public Hora(int hora, int minutos, int segundos) {
+        this.hora = hora;
+        this.minutos = minutos;
+        this.segundos = segundos;
+    }
+
+    // Getters
+    public int getHora() {
+        return hora;
+    }
+
+    public int getMinutos() {
+        return minutos;
+    }
+
+    public int getSegundos() {
+        return segundos;
+    }
+
+    // Setters
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
+
+    public void setMinutos(int minutos) {
+        this.minutos = minutos;
+    }
+
+    public void setSegundos(int segundos) {
+        this.segundos = segundos;
+    }
+
+    /**
+     * Metodo para incrementar los segundos.
+     * Si llegan a 60, se reinician y se incrementan los minutos.
+     * Si los minutos llegan a 60, se reinician y se incrementan las horas.
+     * Si las horas llegan a 24, se reinician a 0.
+     */
+    public void incremetarSegundos() {
+        this.segundos++; // Sumamos un segundo
+        if (this.segundos == 60) {
+            this.segundos = 0;
+            this.minutos++;
+            if (this.minutos == 60) {
+                this.minutos = 0;
+                this.hora++;
+                if (this.hora == 24) {
+                    this.hora = 0;
+                }
+            }
+        }
+    }
+
+    /**
+     * Metodo que devuelve la informacion completa de la hora en formato texto.
+     * 
+     * @return cadena con la hora, minutos y segundos
+     */
+    public String infoHora() {
+        String h = "La hora es: " + this.hora 
+                 + " los minutos son: " + this.minutos 
+                 + " y los segundos son: " + this.segundos;
+        return h;
+    }
+}
+
+/**
+ * Clase Main para probar la clase Hora. Se crean varias horas, se actualizan y
+ * se incrementan segundos.
+ *
+ * @author JKur
+ * @version 1.0
+ * @see Hora
+ */
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Creamos varias horas con valores iniciales
+        Hora h1 = new Hora(10, 11, 52);
+        Hora h2 = new Hora(24, 0, 59);
+        Hora h3 = new Hora(12, 12, 12);
+        Hora h4 = new Hora(8, 59, 59);
+        Hora h5 = new Hora(3, 35, 59);
+
+        // Mostramos la hora de cada objeto
+        System.out.println("La hora de H1 es: " + h1.infoHora());
+        System.out.println("La hora de H2 es: " + h2.infoHora());
+        System.out.println("La hora de H3 es: " + h3.infoHora());
+        System.out.println("La hora de H4 es: " + h4.infoHora());
+        System.out.println("La hora de H5 es: " + h5.infoHora());
+
+        System.out.println("------------------------------------------");
+
+        // Actualizamos horas usando setters
+        h1.setHora(15);
+        System.out.println("La hora actualizada de H1 es: " + h1.getHora());
+
+        h2.setHora(19);
+        System.out.println("La hora actualizada de H2 es: " + h2.getHora());
+
+        h3.setHora(19);
+        System.out.println("La hora actualizada de H3 es: " + h3.getHora());
+
+        System.out.println("------------------------------------------");
+
+        // Incrementamos segundos y mostramos resultados
+        h1.incremetarSegundos();
+        h1.incremetarSegundos();
+        h1.incremetarSegundos();
+        h1.incremetarSegundos();
+        h1.incremetarSegundos();
+        System.out.println(h1.infoHora());
+
+        h4.incremetarSegundos();
+        System.out.println(h4.infoHora());
+
+        h3.incremetarSegundos();
+        h3.incremetarSegundos();
+        h3.incremetarSegundos();
+        h3.incremetarSegundos();
+        h3.incremetarSegundos();
+        System.out.println(h3.infoHora());
+
+        h5.incremetarSegundos();
+        System.out.println(h5.infoHora());
+
+        System.out.println("------------------------------------------");
+    }
+}
