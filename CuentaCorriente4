@@ -1,0 +1,110 @@
+/**
+ * Clase CuentaCorriente4 que representa una cuenta bancaria simple.
+ * Incluye atributos estaticos para el banco y privados para el saldo.
+ * Permite ingresar y sacar dinero, y mostrar la informacion de la cuenta.
+ * 
+ * Autor: JKur
+ * Version: 1.0
+ * @see String
+ */
+public class CuentaCorriente4 {
+
+    String dni;             // Visibilidad por defecto
+    public String nombre;   // Visibilidad publica
+    private double saldo;   // Solo visible dentro de la clase
+
+    private static String banco = "Banco Generico"; // Atributo estatico compartido por todas las cuentas
+
+    /**
+     * Constructor que inicializa dni, nombre y saldo.
+     * 
+     * @param dni dni del titular
+     * @param nombre nombre del titular
+     * @param saldo saldo inicial
+     */
+    public CuentaCorriente4(String dni, String nombre, double saldo) {
+        this.dni = dni;       // Guardamos el dni
+        this.nombre = nombre; // Guardamos el nombre
+        this.saldo = saldo;   // Guardamos el saldo
+    }
+
+    /**
+     * Metodo estatico para obtener el nombre del banco.
+     * Se puede llamar sin crear una cuenta.
+     * 
+     * @return nombre del banco
+     */
+    public static String getBanco() {
+        return banco; // Devolvemos el banco
+    }
+
+    /**
+     * Metodo estatico para cambiar el nombre del banco.
+     * Cambia el valor para todas las cuentas.
+     * 
+     * @param nuevoBanco nuevo nombre del banco
+     */
+    public static void setBanco(String nuevoBanco) {
+        banco = nuevoBanco; // Cambiamos el nombre del banco
+    }
+
+    /**
+     * Metodo para sacar dinero de la cuenta.
+     * Devuelve false si no hay suficiente saldo.
+     * 
+     * @param cantidad cantidad a retirar
+     * @return true si se pudo retirar, false si no
+     */
+    public boolean sacarDinero(double cantidad) {
+        if (cantidad > saldo) {
+            return false; // No hay suficiente dinero
+        }
+        saldo -= cantidad; // Restamos al saldo
+        return true;       // Retirada correcta
+    }
+
+    /**
+     * Metodo para ingresar dinero en la cuenta.
+     * 
+     * @param cantidad cantidad a ingresar
+     */
+    public void ingresarDinero(double cantidad) {
+        saldo += cantidad; // Sumamos al saldo
+    }
+
+    /**
+     * Metodo que muestra toda la informacion de la cuenta.
+     * Incluye el banco, nombre, dni y saldo.
+     */
+    public void mostrarInformacion() {
+        System.out.println("Banco: " + banco
+                + " | Titular: " + nombre
+                + " | DNI: " + dni
+                + " | Saldo: " + saldo + "€");
+    }
+}
+
+
+/**
+ * Clase Main para probar la clase CuentaCorriente4.
+ * Se muestran ejemplos de atributos estaticos y metodos.
+ * 
+ * Autor: JKur
+ * Version: 1.0
+ * @see CuentaCorriente4
+ */
+public class Main {
+    public static void main(String[] args) {
+
+        // Cambiamos el nombre del banco para todas las cuentas
+        CuentaCorriente4.setBanco("Banco Andalucia");
+
+        // Creamos dos cuentas con saldo inicial
+        CuentaCorriente4 c1 = new CuentaCorriente4("12345678A", "Lorena", 800);
+        CuentaCorriente4 c2 = new CuentaCorriente4("87654321B", "Anibal", 1200);
+
+        // Mostramos informacion de cada cuenta
+        c1.mostrarInformacion();
+        c2.mostrarInformacion();
+    }
+}
