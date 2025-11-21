@@ -1,0 +1,84 @@
+/**
+ * Clase CuentaCorriente3 que representa una cuenta bancaria simple.
+ * Se muestran ejemplos de distintos niveles de visibilidad (public, default, private).
+ * Permite ingresar y sacar dinero, y mostrar la informacion de la cuenta.
+ * 
+ * Autor: Jkur
+ * @version 1.0
+ * @see String
+ */
+public class CuentaCorriente3 {
+
+    String dni;        // Visibilidad por defecto (package)
+    public String nombre; // Visibilidad publica
+    private double saldo;  // No visible fuera de la clase (private)
+
+    /**
+     * Constructor que inicializa todos los atributos de la cuenta.
+     * 
+     * @param dni dni del titular
+     * @param nombre nombre del titular
+     * @param saldo saldo inicial de la cuenta
+     */
+    public CuentaCorriente3(String dni, String nombre, double saldo) {
+        this.dni = dni;       // Guardamos el dni
+        this.nombre = nombre; // Guardamos el nombre
+        this.saldo = saldo;   // Guardamos el saldo
+    }
+
+    /**
+     * Metodo para sacar dinero de la cuenta.
+     * Si no hay suficiente saldo, devuelve false.
+     * 
+     * @param cantidad cantidad a retirar
+     * @return true si se pudo retirar, false si no
+     */
+    public boolean sacarDinero(double cantidad) {
+        if (cantidad > saldo) return false; // No hay suficiente dinero
+        saldo -= cantidad;                  // Restamos al saldo
+        return true;                        // Retirada correcta
+    }
+
+    /**
+     * Metodo para ingresar dinero en la cuenta.
+     * 
+     * @param cantidad cantidad a ingresar
+     */
+    public void ingresarDinero(double cantidad) {
+        saldo += cantidad; // Sumamos al saldo
+    }
+
+    /**
+     * Metodo que muestra la informacion completa de la cuenta
+     * por pantalla.
+     */
+    public void mostrarInformacion() {
+        System.out.println("Titular: " + nombre + " | DNI: " + dni + " | Saldo: " + saldo + "€");
+    }
+}
+
+/**
+ * Clase Main para probar la clase CuentaCorriente3.
+ * Se muestran ejemplos de acceso a atributos con distintas visibilidades.
+ * 
+ * Autor: Jkur
+ * @version 1.0
+ * @see CuentaCorriente3
+ */
+public class Main {
+    public static void main(String[] args) {
+
+        // Creamos una cuenta
+        CuentaCorriente3 c = new CuentaCorriente3("12345678A", "Jakub Kurkowski", 500);
+
+        // Acceso permitido
+        System.out.println(c.nombre);  // publico → se puede acceder
+        System.out.println(c.dni);     // por defecto → se puede acceder en el mismo paquete
+
+        // NO PERMITIDO:
+        // System.out.println(c.saldo);  // private → da error si se descomenta
+
+        // Mostramos la informacion completa con el metodo
+        c.mostrarInformacion();
+    }
+}
