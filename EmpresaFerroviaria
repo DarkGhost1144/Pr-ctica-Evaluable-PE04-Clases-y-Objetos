@@ -1,0 +1,203 @@
+import java.time.LocalDate;
+
+/**
+ * Clase JefeDeEquipo que representa al jefe de la estacion
+ *
+ * @author jkur
+ * @version 1.0
+ * @see LocalDate
+ */
+public class JefeDeEquipo {
+
+    String nombre;              // Nombre del jefe
+    String dni;                 // DNI
+    LocalDate fechaNombramiento; // Fecha de nombramiento
+
+    public JefeDeEquipo(String nombre, String dni, LocalDate fechaNombramiento) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.fechaNombramiento = fechaNombramiento;
+    }
+}
+
+/**
+ * Clase Locomotoras que representa la locomotora del tren
+ * 
+ * @author jkur
+ * @version 1.0
+ */
+public class Locomotoras {
+
+    String matricula;        // Matricula de la locomotora
+    int pontenciaMotores;    // Potencia de motores
+    int anyoFabricacion;     // Año de fabricacion
+    String mecanico;         // Nombre del mecanico asignado
+
+    public Locomotoras(String matricula, int pontenciaMotores, int anyoFabricacion, String mecanico) {
+        this.matricula = matricula;
+        this.pontenciaMotores = pontenciaMotores;
+        this.anyoFabricacion = anyoFabricacion;
+        this.mecanico = mecanico;
+    }
+}
+
+
+/**
+ * Clase Maquinista que representa el conductor del tren
+ *
+ * @author jkur
+ * @version 1.0
+ */
+public class Maquinista {
+
+    String nombre;   // Nombre del maquinista
+    String dni;      // DNI
+    String rango;    // Rango o puesto
+    double sueldo;   // Sueldo mensual
+
+    public Maquinista(String nombre, String dni, String rango, double sueldo) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.rango = rango;
+        this.sueldo = sueldo;
+    }
+}
+
+
+/**
+ * Clase que representa un vagon de un tren.
+ * 
+ * @author jkur
+ * @version 1.0
+ */
+public class Vagones {
+
+    int numIdentificador;  // Numero unico del vagon
+    double cargaActual;    // Carga actual en kg
+    double cargaMaxima;    // Carga maxima en kg
+    String mercancia;      // Tipo de mercancia
+
+    public Vagones(int numIdentificador, double cargaActual, double cargaMaxima, String mercancia) {
+        this.numIdentificador = numIdentificador;
+        this.cargaActual = cargaActual;
+        this.cargaMaxima = cargaMaxima;
+        this.mercancia = mercancia;
+    }
+}
+
+/**
+ * Clase Trenes que representa un tren compuesto por una locomotora, maquinista y hasta tres vagones.
+ * 
+ * @author jkur
+ * @version 1.0
+ */
+public class Trenes {
+
+    Locomotoras locomotora;  // Locomotora del tren
+    Vagones vagon1;           // Primer vagon
+    Vagones vagon2;           // Segundo vagon
+    Vagones vagon3;           // Tercer vagon
+    Maquinista maquinista;    // Maquinista que conduce el tren
+    int numVagones;           // Contador de vagones añadidos
+
+    /**
+     * Constructor que inicializa locomotora y maquinista
+     */
+    public Trenes(Locomotoras locomotora, Maquinista maquinista) {
+        this.locomotora = locomotora;
+        this.maquinista = maquinista;
+        this.numVagones = 0;   // Inicializamos contador
+    }
+
+    /**
+     * Metodo para añadir un vagon al tren (max 3)
+     */
+    public void anadirVagon(int id, double cargaMax, double cargaActual, String mercancia) {
+        if (numVagones == 0) {
+            vagon1 = new Vagones(id, cargaMax, cargaActual, mercancia);
+            numVagones++;
+        } else if (numVagones == 1) {
+            vagon2 = new Vagones(id, cargaMax, cargaActual, mercancia);
+            numVagones++;
+        } else if (numVagones == 2) {
+            vagon3 = new Vagones(id, cargaMax, cargaActual, mercancia);
+            numVagones++;
+        } else {
+            System.out.println("No se pueden anyadir mas vagones, limite alcanzado.");
+        }
+    }
+}
+
+/**
+ * Clase Mecanico que representa un mecanico de locomotora
+ *
+ * @author jkur
+ * @version 1.0
+ */
+public class Mecanico {
+
+    String nombre;       // Nombre del mecanico
+    String telefono;     // Telefono de contacto
+    String especilidad;  // Especialidad (frenos, motor, etc.)
+
+    public Mecanico(String nombre, String telefono, String especilidad) {
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.especilidad = especilidad;
+    }
+}
+
+import java.time.LocalDate;
+
+/**
+ * Clase Main para probar la empresa ferroviaria
+ * Se crean empleados, locomotora, tren y vagones
+ * 
+ * 
+ * @author JKur
+ * @version 1.0
+ * @see JefeDeEquipo
+ * @see Locomotoras
+ * @see Maquinista
+ * @see Mecanico
+ * @see Trenes
+ * @see Vagones
+ */
+public class Main {
+
+    public static void main(String[] args) {
+
+        // CREO EMPLEADOS
+        Mecanico meca = new Mecanico("Pepe", "666111222", "Frenos");
+        Maquinista maqui = new Maquinista("Kuba", "12345678H", "Jefe", 1500);
+        JefeDeEquipo jefe = new JefeDeEquipo("Jose Antonio", "87654321Z", LocalDate.now());
+
+        // CREO LOCOMOTORA
+        Locomotoras l1 = new Locomotoras("1234-ABC", 3000, 2015, "meca");
+
+        // CREO TREN
+        Trenes t1 = new Trenes(l1, maqui);
+
+        System.out.println("Tren creado con matricula de locomotora: " + t1.locomotora.matricula);
+
+        // AÑADIMOS VAGONES
+        t1.anadirVagon(1, 5000, 2000, "Madera");
+        t1.anadirVagon(2, 5000, 5000, "Hierro");
+        t1.anadirVagon(3, 5000, 1000, "Trigo");
+
+        System.out.println("Vagones cargados.\n");
+
+        // MOSTRAMOS DATOS
+        System.out.println("==================================");
+        System.out.println("DATOS DEL TREN");
+        System.out.println("==================================");
+
+        System.out.println("Maquinista: " + t1.maquinista.nombre);
+        System.out.println("Sueldo: " + t1.maquinista.sueldo);
+
+        System.out.println("Locomotora: " + t1.locomotora.matricula + " y su potencia es: " + t1.locomotora.pontenciaMotores);
+        System.out.println("El mecanico encargado es de: " + t1.locomotora.mecanico + " y su telefono es: " + meca.telefono);
+
+        System.out.println("El Jefe firma la salida del tren: " + jefe.nombre);
+    }
+}
