@@ -1,0 +1,118 @@
+/**
+ * Clase Factura que representa una factura de un producto o servicio.
+ * Guarda numero de factura, concepto y importe sin IVA.
+ * Calcula el importe total incluyendo IVA y permite modificar los datos.
+ * 
+ * Autor: Jkur
+ * @see String
+ */
+public class Factura {
+
+    private int numero;            // Numero de la factura
+    private String concepto;       // Concepto o descripcion de la factura
+    private double importeSinIva;  // Importe sin IVA
+    private static int IVA = 21;   // IVA estatico aplicado a todas las facturas
+
+    /**
+     * Constructor que inicializa numero, concepto e importe sin IVA.
+     * 
+     * @param numero numero de la factura
+     * @param concepto concepto de la factura
+     * @param importeSinIva importe sin IVA
+     */
+    public Factura(int numero, String concepto, double importeSinIva) {
+        this.numero = numero;             // Guardamos el numero
+        this.concepto = concepto;         // Guardamos el concepto
+        this.importeSinIva = importeSinIva; // Guardamos el importe
+    }
+
+    /**
+     * Devuelve el numero de la factura.
+     * 
+     * @return numero de la factura
+     */
+    public int getNumero() {
+        return numero;
+    }
+
+    /**
+     * Devuelve el concepto de la factura.
+     * 
+     * @return concepto de la factura
+     */
+    public String getConcepto() {
+        return concepto;
+    }
+
+    /**
+     * Calcula y devuelve el importe total con IVA incluido.
+     * 
+     * @return importe total con IVA
+     */
+    public double getImporteTotal() {
+        return importeSinIva + (importeSinIva * IVA / 100); // Calculamos el total
+    }
+
+    /**
+     * Cambia el importe sin IVA de la factura.
+     * 
+     * @param nuevoImporte nuevo valor del importe
+     */
+    public void setImporte(double nuevoImporte) {
+        this.importeSinIva = nuevoImporte;
+    }
+
+    /**
+     * Cambia el concepto de la factura.
+     * 
+     * @param nuevoConcepto nuevo concepto
+     */
+    public void setConcepto(String nuevoConcepto) {
+        this.concepto = nuevoConcepto;
+    }
+
+    /**
+     * Metodo toString que devuelve la informacion completa de la factura
+     * en formato texto.
+     */
+    @Override
+    public String toString() {
+        return "Factura n: " + numero
+                + " | Concepto: " + concepto
+                + " | Importe total (IVA incluido): " + getImporteTotal();
+    }
+}
+
+
+/**
+ * Clase Main para probar la clase Factura.
+ * Se crean facturas, se modifican y se muestran por pantalla.
+ * 
+ * Autor: jkur
+ * @version 1.0
+ * @see Factura
+ */
+public class Main {
+    public static void main(String[] args) {
+
+        // Creamos una factura con numero, concepto e importe
+        Factura f1 = new Factura(1, "Ordenador portatil", 800.0);
+
+        // Mostramos la factura usando toString()
+        System.out.println(f1);
+
+        // Cambiamos el concepto de la factura
+        f1.setConcepto("Ordenador portatil gaming");
+
+        // Cambiamos el importe sin IVA
+        f1.setImporte(900.0);
+
+        // Mostramos los datos actualizados
+        System.out.println(f1);
+
+        // Mostramos numero y concepto por separado
+        System.out.println("Numero de factura: " + f1.getNumero());
+        System.out.println("Concepto: " + f1.getConcepto());
+        System.out.println("Importe total con IVA: " + f1.getImporteTotal());
+    }
+}
